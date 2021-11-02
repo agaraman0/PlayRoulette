@@ -1,9 +1,11 @@
-from flask import Flask
+from flask import Flask, make_response, jsonify
+
 from api.casino import casino
 from api.dealer import dealer
 from api.user import user
 from config import config
 from db import db
+from constant import PATH_NOT_FOUND, SERVER_ERROR, FAILURE_RESPONSE
 
 
 app = Flask(__name__)
@@ -15,9 +17,22 @@ app.register_blueprint(dealer)
 app.register_blueprint(user)
 
 
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
+@app.errorhandler(400)
+def handle_400_error(_error):
+    """Return a http 400 error to client"""
+    return make_response(jsonify(FAILURE_RESPONSE), 400)
+
+
+@app.errorhandler(404)
+def handle_404_error(_error):
+    """Return a http 404 error to client"""
+    return make_response(jsonify(PATH_NOT_FOUND), 404)
+
+
+@app.errorhandler(500)
+def handle_500_error(_error):
+    """Return a http 500 error to client"""
+    return make_response(jsonify(SERVER_ERROR), 500)
 
 
 if __name__ == '__main__':

@@ -2,9 +2,17 @@ from flask import jsonify, Blueprint, make_response, request
 from sqlalchemy import and_
 
 from api.user_helper import is_casino_available, is_user_available, is_game_correct
+from constant import SERVER_ERROR
 from models import *
 
 user = Blueprint("user", __name__, url_prefix="/user/v1")
+
+
+@user.errorhandler(Exception)
+def handle_500_error(_error):
+    """Return a http 500 error to client"""
+    print(_error)
+    return make_response(jsonify(SERVER_ERROR), 500)
 
 
 @user.route('/register', methods=["POST"])

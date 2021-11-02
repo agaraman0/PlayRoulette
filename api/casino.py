@@ -1,8 +1,16 @@
 from flask import jsonify, Blueprint, make_response, request
 
+from constant import SERVER_ERROR
 from models import *
 
 casino = Blueprint("casino", __name__, url_prefix="/casino/v1")
+
+
+@casino.errorhandler(Exception)
+def handle_500_error(_error):
+    """Return a http 500 error to client"""
+    print(_error)
+    return make_response(jsonify(SERVER_ERROR), 500)
 
 
 @casino.route('/create_casino', methods=["POST"])

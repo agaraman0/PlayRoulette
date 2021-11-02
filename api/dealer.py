@@ -3,9 +3,17 @@ from sqlalchemy import and_
 
 from api.dealer_helper import is_dealer_assigned, throw_number, update_all_bets
 from api.exceptions import CasinoOutOfCash, GameNotFoundToPlay
+from constant import SERVER_ERROR
 from models import *
 
 dealer = Blueprint("dealer", __name__, url_prefix="/dealer/v1")
+
+
+@dealer.errorhandler(Exception)
+def handle_500_error(_error):
+    """Return a http 500 error to client"""
+    print(_error)
+    return make_response(jsonify(SERVER_ERROR), 500)
 
 
 @dealer.route('/<dealer_id>/start_game', methods=["POST"])
