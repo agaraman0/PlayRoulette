@@ -7,6 +7,7 @@ ROULETTE_END_RANGE = 36
 class GameStatus(Enum):
     OPEN = "open"
     CLOSE = "close"
+    ARCHIVE = "archive"
 
 
 class BetStatus(Enum):

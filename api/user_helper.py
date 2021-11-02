@@ -30,7 +30,7 @@ def is_user_available(user_id):
 
 def is_game_correct(game_id, user_id):
     with LocalSession(Session) as session:
-        filters = [Game.id == game_id, User.id == user_id]
+        filters = [Game.id == game_id, User.id == user_id, Game.status == GameStatus.OPEN.value]
         game = session.query(Game)\
             .join(Dealer, Game.did == Dealer.id)\
             .join(Casino, Dealer.cid == Casino.id)\

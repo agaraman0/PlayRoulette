@@ -116,7 +116,7 @@ def bet_on_game(user_id):
     game_id = json_args.get('game_id')
     with LocalSession(Session) as session:
         user_obj = session.query(User).filter(User.id == user_id).first()
-        if user_obj.amount < bet_amount:
+        if user_obj.balance < bet_amount:
             return make_response(jsonify({
                 'message': "failed",
                 'data': {
@@ -125,7 +125,7 @@ def bet_on_game(user_id):
             }), 400)
         elif is_game_correct(game_id, user_id):
             bet_object = Bet(bet_number, bet_amount, user_id, game_id)
-            user_obj.amount = user_obj.amount - bet_amount
+            user_obj.balance = user_obj.balance - bet_amount
             session.add(bet_object)
             session.flush()
         else:

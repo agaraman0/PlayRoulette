@@ -1,3 +1,4 @@
+from api.exceptions import CasinoOutOfCash, GameNotFoundToPlay
 from models import *
 from sqlalchemy import and_
 from random import randint
@@ -17,18 +18,29 @@ def throw_number():
     return randint(ROULETTE_START_RANGE, ROULETTE_END_RANGE)
 
 
-def update_all_bets(game_id, game_number):
-    bets_filters = [Game.id == game_id, Bet.status == BetStatus.PENDING.value]
-    casino_filters = [Game.id == game_id, Game.status == GameStatus.CLOSE.value]
+def update_all_bets(dealer_id, game_number):
     with LocalSession(Session) as session:
-        game = session.query(Game).filter(and_(*casino_filters)).first()
+        filters = [Game.did == dealer_id, Game.status == GameStatus.CLOSE.value]
+        game = session.query(Game).filter(and_(*filters)).first()
+        if not game:
+            raise GameNotFoundToPlay
+        bets_filters = [Game.id == game.id, Bet.status == BetStatus.PENDING.value]
+        casino_filters = [Game.id == game.id, Game.status == GameStatus.CLOSE.value]
         game.number = game_number
         bets = session.query(Bet).join(Game, Bet.gid == Game.id).filter(and_(*bets_filters)).all()
-        casino = session.query(Casino)\
-            .join(Dealer, Casino.id == Dealer.id)\
+        casino = session.query(Casino) \
+            .join(Dealer, Casino.id == Dealer.cid) \
             .join(Game, Dealer.id == Game.did).filter(and_(*casino_filters)).first()
-
         for bet in bets:
             if bet.bet_number == game.number:
                 user = session.query(User).filter(User.id == bet.uid).first()
-                if casino
+                if casino.balance < bet.amount:
+                    raise CasinoOutOfCash
+                casino.balance = casino.balance - bet.amount
+                user.balance = user.balance + 2*bet.amount
+                bet.status = BetStatus.WON.value
+            else:
+                casino.balance = casino.balance + bet.amount
+                bet.status = BetStatus.LOST.value
+        game.status = GameStatus.ARCHIVE.value
+        session.flush()
