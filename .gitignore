@@ -1,0 +1,6 @@
+venv/
+.idea/
+*.env
+*.yml
+*.ipynb
+__pycache__
