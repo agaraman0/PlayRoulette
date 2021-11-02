@@ -1,8 +1,8 @@
 from flask import Flask, make_response, jsonify
 
-from api.casino import casino
-from api.dealer import dealer
-from api.user import user
+from casino.routes import casino
+from dealer.routes import dealer
+from user.routes import user
 from config import config
 from db import db
 from constant import PATH_NOT_FOUND, SERVER_ERROR, FAILURE_RESPONSE

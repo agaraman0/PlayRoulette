@@ -1,9 +1,10 @@
 from flask import jsonify, Blueprint, make_response, request
 from sqlalchemy import and_
 
-from api.user_helper import is_casino_available, is_user_available, is_game_correct
+
 from constant import SERVER_ERROR
 from models import *
+from user.helpers import is_casino_available, is_user_available, is_game_correct
 
 user = Blueprint("user", __name__, url_prefix="/user/v1")
 

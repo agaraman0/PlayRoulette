@@ -1,9 +1,9 @@
 from flask import jsonify, Blueprint, make_response
 from sqlalchemy import and_
 
-from api.dealer_helper import is_dealer_assigned, throw_number, update_all_bets
 from api.exceptions import CasinoOutOfCash, GameNotFoundToPlay
 from constant import SERVER_ERROR
+from dealer.helpers import is_dealer_assigned, update_all_bets
 from models import *
 
 dealer = Blueprint("dealer", __name__, url_prefix="/dealer/v1")
