@@ -1,8 +1,8 @@
 from flask import jsonify, Blueprint, make_response, request
 
-from api_response import APIResponseClass, StatusMessage
-from constant import SERVER_ERROR
-from exceptions import *
+from helpers.api_response import APIResponseClass, StatusMessage
+from helpers.constant import SERVER_ERROR
+from helpers.exceptions import *
 from user.helpers import create_user, assign_casino, \
     list_all_games, add_amount_to_user_balance, user_balance, make_bet
 
@@ -85,7 +85,7 @@ def bet_on_game(user_id):
     game_id = json_args.get('game_id')
     try:
         api_response.data = make_bet(user_id, bet_amount, game_id, bet_number)
-    except (InsufficientAmount, GameNotAvailableForUser) as ie:
+    except (InsufficientAmount, GameNotAvailableForUser, NumberOutOfRange) as ie:
         api_response.error = ie.message
         api_response.message = StatusMessage.FAILED
         api_response.status_code = 400

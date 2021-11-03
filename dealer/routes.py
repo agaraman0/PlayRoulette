@@ -1,9 +1,9 @@
 from flask import jsonify, Blueprint, make_response
 
-from api_response import APIResponseClass, StatusMessage
-from constant import SERVER_ERROR
+from helpers.api_response import APIResponseClass, StatusMessage
+from helpers.constant import SERVER_ERROR
 from dealer.helpers import update_all_bets, create_game, stop_game_for_dealer, throw_number
-from exceptions import CasinoOutOfCash, GameNotFoundToPlay, DealerAlreadyAssigned, DealerHasNoActiveGame
+from helpers.exceptions import CasinoOutOfCash, GameNotFoundToPlay, DealerAlreadyAssigned, DealerHasNoActiveGame
 
 dealer = Blueprint("dealer", __name__, url_prefix="/dealer/v1")
 

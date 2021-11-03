@@ -1,6 +1,6 @@
 import datetime
 
-from constant import GameStatus, BetStatus
+from helpers.constant import GameStatus, BetStatus
 from db import *
 
 
@@ -50,7 +50,6 @@ class Dealer(db.Model):
 
 
 class Game(db.Model):
-
     __tablename__ = "games"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -78,7 +77,6 @@ class Game(db.Model):
 
 
 class User(db.Model):
-
     __tablename__ = "users"
 
     id = db.Column(db.Integer(), primary_key=True)
@@ -90,20 +88,24 @@ class User(db.Model):
     def __init__(self, name):
         self.name = name
         self.balance = 0
+        self.cid = None
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
     def get_format(self):
-        return {
+        response = {
             'user_id': self.id,
             'user_name': self.name,
             'user_balance': self.balance
         }
+        if self.cid is not None:
+            response['casino_id'] = self.cid
+
+        return response
 
 
 class Bet(db.Model):
-
     __tablename__ = "bets"
 
     id = db.Column(db.Integer, primary_key=True)

@@ -5,7 +5,7 @@ from dealer.routes import dealer
 from user.routes import user
 from config import config
 from db import db
-from constant import PATH_NOT_FOUND, SERVER_ERROR, FAILURE_RESPONSE
+from helpers.constant import PATH_NOT_FOUND, SERVER_ERROR, FAILURE_RESPONSE
 
 
 app = Flask(__name__)
@@ -19,8 +19,7 @@ app.register_blueprint(user)
 
 @app.route('/', methods=['GET'])
 def home():
-    return '''<h1>VLib - Online Library</h1>
-                <p>A flask api implementation for book information.</p>'''
+    return '''<h1>Hello World</h1>'''
 
 
 @app.errorhandler(400)

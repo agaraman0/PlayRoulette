@@ -1,8 +1,8 @@
 from typing import Dict, Any, List
 
-from exceptions import *
+from helpers.exceptions import *
 from models import *
-from constant import ROULETTE_START_RANGE, ROULETTE_END_RANGE
+from helpers.constant import ROULETTE_START_RANGE, ROULETTE_END_RANGE
 
 from sqlalchemy import and_
 
@@ -181,6 +181,8 @@ def make_bet(user_id: int, bet_amount: int, game_id: int, bet_number: int):
 
     :raises: InsufficientAmount, GameNotAvailableForUser
     """
+    if not is_valid_number(bet_number):
+        raise NumberOutOfRange
     with LocalSession(Session) as session:
         user_obj = session.query(User).filter(User.id == user_id).first()
         if user_obj.balance < bet_amount:

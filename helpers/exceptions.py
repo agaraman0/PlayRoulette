@@ -112,3 +112,15 @@ class GameNotAvailableForUser(RouletteException):
         :param message:
         """
         super(GameNotAvailableForUser, self).__init__(code=400, message=message)
+
+
+class NumberOutOfRange(RouletteException):
+    """
+
+    """
+    def __init__(self, message: str = "Number is not available on board"):
+        """
+
+        :param message:
+        """
+        super(NumberOutOfRange, self).__init__(code=400, message=message)

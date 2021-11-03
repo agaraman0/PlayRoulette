@@ -1,8 +1,8 @@
 from flask import jsonify, Blueprint, make_response, request
 
-from api_response import APIResponseClass
+from helpers.api_response import APIResponseClass
 from casino.helpers import register_casino, add_dealer_to_casino, list_all_dealers, add_balance_to_casino
-from constant import SERVER_ERROR
+from helpers.constant import SERVER_ERROR
 
 casino = Blueprint("casino", __name__, url_prefix="/casino/v1")
 
