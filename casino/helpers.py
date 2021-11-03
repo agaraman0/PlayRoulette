@@ -30,7 +30,7 @@ def add_dealer_to_casino(casino_id: int, dealer_name: str):
         dealer_obj = Dealer(dealer_name, casino_id)
         session.add(dealer_obj)
         session.flush()
-    return dealer_obj.id
+    return dealer_obj.get_format()
 
 
 def list_all_dealers(casino_id: int):
@@ -60,4 +60,4 @@ def add_balance_to_casino(casino_id: int, amount: int):
         df_response = session.query(Casino).filter(Casino.id == casino_id).first()
         df_response.balance += amount
         session.flush()
-    return df_response
+    return df_response.get_format()

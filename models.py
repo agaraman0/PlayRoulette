@@ -18,6 +18,13 @@ class Casino(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
+    def get_format(self):
+        return {
+            'casino_id': self.id,
+            'casino_name': self.name,
+            'balance': self.balance
+        }
+
 
 class Dealer(db.Model):
     __tablename__ = 'dealers'
@@ -64,8 +71,8 @@ class Game(db.Model):
 
     def get_format(self):
         return {
-            'id': self.id,
-            'status': self.status,
+            'game_id': self.id,
+            'game_status': self.status,
             'start_time': self.start_time
         }
 
@@ -86,6 +93,13 @@ class User(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
+
+    def get_format(self):
+        return {
+            'user_id': self.id,
+            'user_name': self.name,
+            'user_balance': self.balance
+        }
 
 
 class Bet(db.Model):
@@ -114,3 +128,13 @@ class Bet(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
+
+    def get_format(self):
+        return {
+            'bet_id': self.id,
+            'bet_number': self.bet_number,
+            'bet_amount': self.amount,
+            'user_id': self.uid,
+            'game_id': self.gid,
+            'bet_status': self.status
+        }
