@@ -17,6 +17,12 @@ app.register_blueprint(dealer)
 app.register_blueprint(user)
 
 
+@app.route('/', methods=['GET'])
+def home():
+    return '''<h1>VLib - Online Library</h1>
+                <p>A flask api implementation for book information.</p>'''
+
+
 @app.errorhandler(400)
 def handle_400_error(_error):
     """Return a http 400 error to client"""
@@ -36,4 +42,4 @@ def handle_500_error(_error):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5000, debug=True, host='0.0.0.0')

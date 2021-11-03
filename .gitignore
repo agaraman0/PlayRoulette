@@ -1,6 +1,9 @@
 venv/
 .idea/
 *.env
-*.yml
+*.old
 *.ipynb
 __pycache__
+migrations_backup/
+migrations/
+*.dev

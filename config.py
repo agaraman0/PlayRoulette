@@ -3,9 +3,8 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-os.environ['DATABASE_URL'] = "postgresql:///roulette"
+os.environ['DATABASE_URL'] = "postgresql://aman:aman@db:5432/aman"
 os.environ['FLASK_APP'] = "main.py"
-
 
 
 class Config(object):

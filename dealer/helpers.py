@@ -5,6 +5,19 @@ from random import randint
 from constant import ROULETTE_START_RANGE, ROULETTE_END_RANGE
 
 
+def create_game(dealer_id: int):
+    """
+
+    :param dealer_id:
+    :return:
+    """
+    with LocalSession(Session) as session:
+        if not is_dealer_assigned(dealer_id):
+            game_obj = Game(dealer_id)
+            session.add(game_obj)
+            session.flush()
+
+
 def is_dealer_assigned(dealer_id):
     filters = [Game.did == dealer_id, Game.status == GameStatus.OPEN.value]
     with LocalSession(Session) as session:
