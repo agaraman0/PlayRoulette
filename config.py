@@ -1,10 +1,18 @@
 import os
 
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-os.environ['DATABASE_URL'] = "postgresql://aman:aman@db:5432/aman"
-os.environ['FLASK_APP'] = "main.py"
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
+
+os.environ['DATABASE_URL'] = os.getenv('DATABASE_URL').format(DB_USER, DB_PASSWORD, DB_NAME)
+os.environ['FLASK_APP'] = os.getenv('FLASK_APP')
 
 
 class Config(object):

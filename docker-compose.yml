@@ -9,7 +9,7 @@ services:
     ports:
       - 5000:5000
     env_file:
-      - ./.env.dev
+      - ./.env
     depends_on:
       - db
   db:
@@ -17,9 +17,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=aman
-      - POSTGRES_PASSWORD=aman
-      - POSTGRES_DB=aman
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=roulette
 
 volumes:
   postgres_data:
