@@ -38,11 +38,11 @@ $ touch .env
 
 ![](https://i.ibb.co/sJCKzk8/Screenshot-from-2021-11-04-10-52-28.png)
 
-**update .env file with same DB_USER, DB_PASSWORD, DB and other environment like this**
+**Update .env file with same DB_USER, DB_PASSWORD, DB and other environment variables like this**
 
-![](https://i.ibb.co/YfqGrPm/Screenshot-from-2021-11-04-10-57-58.png)
+![](https://i.ibb.co/DwR4BDh/Screenshot-from-2021-11-04-14-02-35.png)
 
-*Before running this make sure you do not have any existing migration in folder named **migrations/***
+*Before running this make sure you do not have any existing migration in Repo named **migrations/***
 
 ```bash
 $ docker-compose up -d --build
@@ -52,7 +52,7 @@ $ docker ps # you should be able to see 2 docker images running one as applicati
 
 **Our Application is successfully up and running to test it run localhost:5000 in Browser**
 
-To Play Roulette Before That we also have to migrate and populate out DBs for that
+**Before we start playing we also have to migrate and populate out DBs for that**
 
 ```bash
 $ docker exec -it <application_server_contianer_name> bash
