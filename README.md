@@ -52,7 +52,7 @@ $ docker ps # you should be able to see 2 docker images running one as applicati
 
 **Our Application is successfully up and running to test it run localhost:5000 in Browser**
 
-**Before we start playing we also have to migrate and populate database schema**
+**If you make any changes to DB models then we also have to migrate and populate database schema**
 
 ```bash
 $ docker exec -it <application_server_contianer_name> bash

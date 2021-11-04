@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build: ./
-    command: python main.py
+    command: bash -c "python manage.py db init && python manage.py db migrate && python manage.py db upgrade && python main.py"
     volumes:
       - ./:/usr/src/app/
     ports:
@@ -17,9 +17,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=PLACEHOLDER_USER
-      - POSTGRES_PASSWORD=PLACEHOLDER_PASSWORD
-      - POSTGRES_DB=PLACEHOLDER_DB
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=roulette
 
 volumes:
   postgres_data:
