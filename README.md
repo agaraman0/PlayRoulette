@@ -1,12 +1,15 @@
 # PlayRoulette
 
-+ Rules for playing roulette
-    - Dealer opens a game
-    - Multiple players can bet on which number the ball will land
-    - Dealer closes the game and throws the ball
-+ Rewards
-    - Players who bet on the correct number will get double the bet amount as reward
-    - Other players lose the money to the casino
+### Rules for playing roulette
+
+- Dealer opens a game
+- Multiple players can bet on which number the ball will land
+- Dealer closes the game and throws the ball
+
+### Rewards
+
+- Players who bet on the correct number will get double the bet amount as reward
+- Other players lose the money to the casino
 
 ### Data Points to Track
 
@@ -16,7 +19,7 @@
 + Game details - StartTime, EndTime, Status, ThrownNumber
 + Bet details - BetNumber, Amount, BettingTime, User, Game, BetStatus
 
-## Requirements
+### Requirements
 
 + Docker 20.10
 + Postman
