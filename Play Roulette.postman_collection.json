@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "c4782f75-2f93-444f-bb78-2b9bed79e381",
+		"name": "Play Roulette",
+		"description": "### Rules for playing roulette\n- Dealer opens a game\n- Multiple players can bet on which number the ball will land\n- Dealer closes the game and throws the ball\n\n\n### Rewards\n- Players who bet on the correct number will get double the bet amount as reward\n- Other players lose the money to the casino\n\n\n### Data Points to Track\n\n+ Casino details - Name, BalanceAmount\n    - Dealers in a casino - Name\n+ User details - Name, BalanceAmount, CurrentCasino\n+ Game details - StartTime, EndTime, Status, ThrownNumber\n+ Bet details - BetNumber, Amount, BettingTime, User, Game, BetStatus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Casino",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Casino de Monte Carlo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/casino/v1/create_casino",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"casino",
+						"v1",
+						"create_casino"
+					]
+				},
+				"description": "**Register Casino in casino table with casino name and unique casino id**"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Dealer To Casino",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Dealer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/casino/v1/5/add_dealer",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"casino",
+						"v1",
+						"5",
+						"add_dealer"
+					]
+				},
+				"description": "**Add Dealer to a Registered casino By creating a new Dealer id and taking name as args**"
+			},
+			"response": []
+		},
+		{
+			"name": "List All Dealers For a Casino",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/casino/v1/5/dealers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"casino",
+						"v1",
+						"5",
+						"dealers"
+					]
+				},
+				"description": "**List All Dealers Assign to a registered casino**"
+			},
+			"response": []
+		},
+		{
+			"name": "Recharge Casino Balance",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 100000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/casino/v1/5/recharge",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"casino",
+						"v1",
+						"5",
+						"recharge"
+					]
+				},
+				"description": "**Recharge Casino Balance with amount and add to existing amount of casino**"
+			},
+			"response": []
+		},
+		{
+			"name": "Start Game By A Dealer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dealer/v1/4/start_game",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dealer",
+						"v1",
+						"4",
+						"start_game"
+					]
+				},
+				"description": "**Start A game by creating new game object with open status under a dealer**"
+			},
+			"response": []
+		},
+		{
+			"name": "Stop Game By A Dealer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dealer/v1/5/stop_game",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dealer",
+						"v1",
+						"5",
+						"stop_game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play Game or Throw Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dealer/v1/5/play",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dealer",
+						"v1",
+						"5",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Aman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/v1/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"v1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Casino To A Registered User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"casino_id\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/v1/1/enter_casino",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"v1",
+						"1",
+						"enter_casino"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recharge User Balance",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/v1/1/recharge",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"v1",
+						"1",
+						"recharge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Games Available For a User in Current Casino",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/v1/1/games_available",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"v1",
+						"1",
+						"games_available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make A Bet On Open Game in Current Casino",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lucky_number\": 13,\n    \"amount\": 80,\n    \"game_id\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/v1/1/bet",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"v1",
+						"1",
+						"bet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Cashout Balance After all Bets Wins Loose and Pending",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/v1/1/cashout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"v1",
+						"1",
+						"cashout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Some Error Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/deer/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"deer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Some Error Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dealer/v1/4/start_game",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dealer",
+						"v1",
+						"4",
+						"start_game"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
