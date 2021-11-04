@@ -14,7 +14,7 @@ def register_casino(name: str):
         casino_obj = Casino(name)
         session.add(casino_obj)
         session.flush()
-    return casino_obj.id
+    return casino_obj.get_format()
 
 
 def add_dealer_to_casino(casino_id: int, dealer_name: str):

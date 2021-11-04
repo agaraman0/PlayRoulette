@@ -64,16 +64,25 @@ class Game(db.Model):
         self.did = dealer_id
         self.status = status
         self.start_time = datetime.datetime.now()
+        self.end_time = None
+        self.number = None
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
     def get_format(self):
-        return {
+        response = {
             'game_id': self.id,
             'game_status': self.status,
-            'start_time': self.start_time
+            'start_time': self.start_time,
+            'dealer_id': self.did
         }
+        if self.number is not None:
+            response['winning_number'] = self.number
+
+        if self.end_time is not None:
+            response['end_time'] = self.end_time
+        return response
 
 
 class User(db.Model):

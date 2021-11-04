@@ -2,7 +2,7 @@ from typing import Dict, Any
 
 from helpers.exceptions import CasinoOutOfCash, GameNotFoundToPlay, DealerAlreadyAssigned, DealerHasNoActiveGame
 from models import *
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from random import randint
 from helpers.constant import ROULETTE_START_RANGE, ROULETTE_END_RANGE
 
@@ -56,7 +56,8 @@ def is_dealer_assigned(dealer_id: int) -> bool:
 
     :return: dealer assignment flag
     """
-    filters = [Game.did == dealer_id, Game.status == GameStatus.OPEN.value, Game.status == GameStatus.CLOSE.value]
+    game_or_filter = [Game.status == GameStatus.OPEN.value, Game.status == GameStatus.CLOSE.value]
+    filters = [Game.did == dealer_id, or_(*game_or_filter)]
     with LocalSession(Session) as session:
         game_objects = session.query(Game).filter(and_(*filters)).all()
         if len(game_objects) > 0:
